@@ -1,0 +1,19 @@
+{% if style == 'masonry' %}
+    <div class="travelbook-gallery-thumbnails-masonry {% if align == 'right' %}travelbook-gallery-right{% endif %} {% if align == 'left' %}travelbook-gallery-left{% endif %}" style="width:{{ width }}%">
+        {%~ for image in gallery_images %}
+        <a href="{{ slug }}/{{ image.filename }}" class="glightbox" data-gallery="gallery_{{ gallery_id }}">
+            {{ image.cropResize(300,300).html('My title', 'Some ALT text', 'sds')|raw }}
+        </a>
+        {%~ endfor %}
+    </div>
+{% else %}
+
+<div class="travelbook-gallery-thumbnails-grid {% if align == 'right' %}travelbook-gallery-right{% endif %} {% if align == 'left' %}travelbook-gallery-left{% endif %}" style="width:{{ width }}%">
+    {%~ for image in gallery_images %}
+        <a href="{{ slug }}/{{ image.filename }}" class="glightbox" data-gallery="gallery_{{ gallery_id }}" style="width: {{ image_width }}%;">
+            {{ image.cropZoom(400,400).html('My title', 'Some ALT text', 'sds')|raw }}
+        </a>
+    {%~ endfor %}
+</div>
+
+{% endif %}

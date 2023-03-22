@@ -1,0 +1,6 @@
+<figure class="image-caption" {% if align == 'right' %}style="float:right;"{% endif %} {% if align == 'left' %}style="float:left;"{% endif %}">
+    <a href="{{ slug }}/{{ image.filename }}" class="glightbox">
+        <img title="{{ caption }}" alt="" class="caption img-fluid" src="{{ image.url }}">
+        <figcaption class="">{{ caption }}</figcaption>
+    </a>
+</figure>

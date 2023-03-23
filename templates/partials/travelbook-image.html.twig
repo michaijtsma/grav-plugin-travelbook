@@ -1,6 +1,6 @@
-<figure class="image-caption" {% if align == 'right' %}style="float:right;"{% endif %} {% if align == 'left' %}style="float:left;"{% endif %}">
+<figure {% if align == 'right' %}class="image-caption travel-book-image-right"{% endif %} {% if align == 'left' %}class="image-caption travel-book-image-left"{% endif %}">
     <a href="{{ slug }}/{{ image.filename }}" class="glightbox">
-        <img title="{{ caption }}" alt="" class="caption img-fluid" src="{{ image.url }}">
-        <figcaption class="">{{ caption }}</figcaption>
+        <img title="{{ caption }}" alt="" class="caption img-fluid" src="{{ image.quality(100).url }}">
     </a>
+    {% if caption %}<figcaption class="figure-caption">{{ caption }}</figcaption>{% endif %}
 </figure>

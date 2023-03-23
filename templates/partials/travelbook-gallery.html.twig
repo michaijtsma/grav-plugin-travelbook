@@ -1,19 +1,35 @@
-{% if style == 'masonry' %}
-    <div class="travelbook-gallery-thumbnails-masonry {% if align == 'right' %}travelbook-gallery-right{% endif %} {% if align == 'left' %}travelbook-gallery-left{% endif %}" style="width:{{ width }}%">
+<div class="travelbook-gallery-container {% if align == 'right' %}travelbook-gallery-right{% endif %} {% if align == 'left' %}travelbook-gallery-left{% endif %}" style="width:{{ width }}%" >
+
+    <div class="{% if style == 'masonry' %}travelbook-gallery-thumbnails-masonry{% else %}travelbook-gallery-thumbnails-grid{% endif %} {% if has_video %} has_video {% endif %}" />
         {%~ for image in gallery_images %}
-        <a href="{{ slug }}/{{ image.filename }}" class="glightbox" data-gallery="gallery_{{ gallery_id }}">
-            {{ image.cropResize(300,300).html('My title', 'Some ALT text', 'sds')|raw }}
-        </a>
+            {% if image.type == 'video' %}
+                {{ image.html('My title', 'Some ALT text', 'img-fluid')|raw }}
+            {% else %}
+                <a href="{{ image.url }}" class="glightbox" data-gallery="gallery_{{ gallery_id }}" {% if image_width %}style="width:{{ image_width }}%;"{% endif %}>
+                    {{ image.cropZoom(400,400).quality(100).html('My title', 'Some ALT text', 'img-fluid')|raw }}
+                </a>
+            {% endif %}
         {%~ endfor %}
     </div>
-{% else %}
+    {% if caption %}<figcaption class="figure-caption">{{ caption }}</figcaption>{% endif %}
 
-<div class="travelbook-gallery-thumbnails-grid {% if align == 'right' %}travelbook-gallery-right{% endif %} {% if align == 'left' %}travelbook-gallery-left{% endif %}" style="width:{{ width }}%">
-    {%~ for image in gallery_images %}
-        <a href="{{ slug }}/{{ image.filename }}" class="glightbox" data-gallery="gallery_{{ gallery_id }}" style="width: {{ image_width }}%;">
-            {{ image.cropZoom(400,400).html('My title', 'Some ALT text', 'sds')|raw }}
-        </a>
-    {%~ endfor %}
+{#    {% if style == 'masonry' %}#}
+{#        <div class="travelbook-gallery-thumbnails-masonry">#}
+{#            {%~ for image in gallery_images %}#}
+{#            <a href="{{ image.url }}" class="glightbox" data-gallery="gallery_{{ gallery_id }}">#}
+{#                {{ image.cropResize(300,300).html('My title', 'Some ALT text', 'img-fluid')|raw }}#}
+{#            </a>#}
+{#            {%~ endfor %}#}
+{#        </div>#}
+{#    {% else %}#}
+{#        <div class="travelbook-gallery-thumbnails-grid">#}
+{#            {%~ for image in gallery_images %}#}
+{#            <a href="{{ image.url }}" class="glightbox" data-gallery="gallery_{{ gallery_id }}" style="width: {{ image_width }}%;">#}
+{#                {{ image.cropZoom(400,400).html('My title', 'Some ALT text', 'img-fluid')|raw }}#}
+{#            </a>#}
+{#            {%~ endfor %}#}
+{#        </div>#}
+{#    {% endif %}#}
+{#    #}
+{#    {% if caption %}<figcaption class="figure-caption">{{ caption }}</figcaption>{% endif %}#}
 </div>
-
-{% endif %}

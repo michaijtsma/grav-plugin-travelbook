@@ -53,7 +53,7 @@
 video {background-color: black;}
 
 
-.gallery .gallery-item:hover img
+.gallery .gallery-item:hover img {}
 
 figure.travel-book-image-right {float:right; margin-left:15px;}
 figure.travel-book-image-left {float:left; margin-right:15px;}
